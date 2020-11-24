@@ -31,17 +31,19 @@ class Dashboard extends CI_Controller {
 	}
 	public function index()
 	{
-		$data['query'] = $this->db->query('SELECT * FROM buku');
+		$data['jml_buku'] = $this->db->query('SELECT * FROM buku');
+		$data['jml_anggota'] = $this->db->query('SELECT * FROM anggota');
 		$this->load->view('header');
 		$this->load->view('sidebar');
 		$this->load->view('index', $data);
 		$this->load->view('footer');
 	}
-	function data_mahasiswa()
+	function data_anggota()
 	{
+		$data['anggota'] = $this->M_perpus->get_data('anggota')->result();
 		$this->load->view('header');
 		$this->load->view('sidebar');
-		$this->load->view('mahasiswa');
+		$this->load->view('anggota', $data);
 		$this->load->view('footer');
 	}
 	function data_buku()
@@ -175,6 +177,93 @@ class Dashboard extends CI_Controller {
 					'id_buku' => $id_buku);
 				$this->M_perpus->update_data('buku',$data,$where);
 				redirect('dashboard/data_buku');
+			}
+		}	
+	}
+
+	function hapus_anggota($id_anggota){
+			$where = array('id_anggota' => $id_anggota);
+			$this->M_perpus->delete_data($where,'anggota');
+			redirect('dashboard/data_anggota');
+	}
+
+	function tambah_anggota()
+	{
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('tambah_anggota');
+		$this->load->view('footer');
+	}
+
+	function tambah_anggota_aksi(){
+		$nama_anggota = $this->input->post('nama_lengkap');
+		$gender = $this->input->post('gender');
+		$no_telp = $this->input->post('no_telp');
+		$alamat = $this->input->post('alamat');
+		$email = $this->input->post('email');
+		$password = $this->input->post('password');
+		$this->form_validation->set_rules('nama_lengkap', 'Nama Anggota', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		if($this->form_validation->run() != false){
+				$data = array(
+					'nama_anggota' => $nama_anggota,
+					'gender' => $gender,
+					'no_telp' => $no_telp,
+					'alamat' => $alamat,
+					'email' => $email,
+					'password' => md5($password)
+					);
+				$this->M_perpus->insert_data($data,'anggota');
+				redirect('dashboard/data_anggota');
+		}
+	}
+
+	function edit_anggota($id_anggota){
+		$where = array('id_anggota' => $id_anggota);
+		$data['anggota'] = $this->M_perpus->edit_data_anggota($where)->result();
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('edit_anggota',$data);
+		$this->load->view('footer');
+	}
+
+	function update_anggota(){
+		$nama_anggota = $this->input->post('nama_lengkap');
+		$id_anggota = $this->input->post('id_anggota');
+		$gender = $this->input->post('gender');
+		$no_telp = $this->input->post('no_telp');
+		$alamat = $this->input->post('alamat');
+		$email = $this->input->post('email');
+		$password = $this->input->post('password');
+		$this->form_validation->set_rules('nama_lengkap', 'Nama Anggota', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		if($this->form_validation->run() != false){
+			if($password == NULL){
+				$data = array(
+					'nama_anggota' => $nama_anggota,
+					'gender' => $gender,
+					'no_telp' => $no_telp,
+					'alamat' => $alamat,
+					'email' => $email					
+				);
+					$where = array(
+						'id_anggota' => $id_anggota);
+				$this->M_perpus->update_data('anggota',$data,$where);
+				redirect('dashboard/data_anggota');
+			}else{
+				$data = array(
+					'nama_anggota' => $nama_anggota,
+					'gender' => $gender,
+					'no_telp' => $no_telp,
+					'alamat' => $alamat,
+					'email' => $email,
+					'password' => md5($password)				
+				);
+					$where = array(
+						'id_anggota' => $id_anggota);
+					$this->M_perpus->update_data('anggota',$data,$where);
+					redirect('dashboard/data_anggota');
 			}
 		}	
 	}

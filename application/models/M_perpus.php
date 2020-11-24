@@ -10,6 +10,10 @@ class M_perpus extends CI_Model
         return $this->db->select('*')->from('buku')->join('kategori', 'buku.id_kategori=kategori.id_kategori')->where($where)->get();
         //return $this->db->get_where($where);
     }
+    function edit_data_anggota($where){
+        return $this->db->select('*')->from('anggota')->where($where)->get();
+        //return $this->db->get_where($where);
+    }
     function get_data($table){
         return $this->db->get($table);
     }

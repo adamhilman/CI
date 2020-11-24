@@ -15,7 +15,7 @@
             </li>
             <li class="ripple"><a href="<?php echo base_url();?>dashboard/data_buku"><span class="fa fa-book"></span> Data Buku  </a>
             </li>
-            <li class="ripple"><a href="<?php echo base_url();?>dashboard/data_mahasiswa"><span class="fa fa-users"></span> Data Mahasiswa </a>
+            <li class="ripple"><a href="<?php echo base_url();?>dashboard/data_anggota"><span class="fa fa-users"></span> Data Anggota </a>
               <ul class="nav nav-list tree">
                 <li><a href="datatables.html">Data Tables</a></li>
                 <li><a href="handsontable.html">handsontable</a></li>

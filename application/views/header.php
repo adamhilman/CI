@@ -38,10 +38,9 @@
                 <span class="middle"></span>
                 <span class="bottom"></span>
               </div>
-                <a href="index.html" class="navbar-brand"> 
+                <a href="<?php echo base_url()?>" class="navbar-brand"> 
                  <b>MIMIN</b>
                 </a>
-
               <ul class="nav navbar-nav search-nav">
                 <li>
                    <div class="search">

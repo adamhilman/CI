@@ -17,7 +17,7 @@
                                     <div class="panel box-v1">
                                       <div class="panel-heading bg-white border-none">
                                         <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
-                                          <h4 class="text-left">Data Mahasiswa</h4>
+                                          <h4 class="text-left">Data Anggota</h4>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-6 text-right">
                                            <h4>
@@ -26,8 +26,8 @@
                                         </div>
                                       </div>
                                       <div class="panel-body text-center">
-                                        <h1>51181</h1>
-                                        <p>Mahasiswa</p>
+                                      <h1><?php echo $jml_anggota->num_rows();?></h1>
+                                        <p>Anggota</p>
                                         <hr/>
                                       </div>
                                     </div>
@@ -45,7 +45,7 @@
                                         </div>
                                       </div>
                                       <div class="panel-body text-center">
-                                        <h1><?php echo $query->num_rows();?></h1>
+                                        <h1><?php echo $jml_buku->num_rows();?></h1>
                                         <p>Total Buku</p>
                                         <hr/>
                                       </div>
