@@ -38,12 +38,61 @@ class Dashboard extends CI_Controller {
 		$this->load->view('index', $data);
 		$this->load->view('footer');
 	}
+	public function profile()
+	{
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('profile');
+		$this->load->view('footer');
+	}
+	function update_profile(){
+		$konfirmasi = $this->session->userdata("password");
+		$id = $this->input->post('id_admin');
+		$new_pass = $this->input->post('new_pass');
+		$old_pass = $this->input->post('old_pass');
+		$nama = $this->input->post('nama_lengkap');
+		$this->form_validation->set_rules('old_pass', 'Password Lama', 'required');
+		if($this->form_validation->run() != false){
+			if ($konfirmasi == md5($old_pass)){
+				if( $new_pass == NULL ){
+					$data = array(
+						'nama_admin' => $nama
+						);
+						$where = array(
+							'id_admin' => $id);
+					
+						$this->M_perpus->update_data('admin',$data,$where);
+						$this->session->set_userdata('nama', $nama);
+						redirect('dashboard/profile');
+				}else{
+					$data = array(
+						'nama_admin' => $nama,
+						'password' => $new_pass
+						);
+						$where = array(
+							'id_admin' => $id);
+					
+						$this->M_perpus->update_data('admin',$data,$where);
+						$this->session->set_userdata('nama', $nama);
+						redirect('dashboard/profile');
+				}
+			}else{
+				echo "salah password lama";
+			}
+		}else{
+			$this->load->view('header');
+			$this->load->view('sidebar');
+			$this->load->view('profile');
+			$this->load->view('footer');
+		}
+	}
+	
 	function data_anggota()
 	{
 		$data['anggota'] = $this->M_perpus->get_data('anggota')->result();
 		$this->load->view('header');
 		$this->load->view('sidebar');
-		$this->load->view('anggota', $data);
+		$this->load->view('admin/anggota', $data);
 		$this->load->view('footer');
 	}
 	function data_buku()
@@ -51,7 +100,7 @@ class Dashboard extends CI_Controller {
 		$data['buku'] = $this->M_perpus->get_data('buku')->result();
 		$this->load->view('header');
 		$this->load->view('sidebar');
-		$this->load->view('buku', $data);
+		$this->load->view('admin/buku', $data);
 		$this->load->view('footer');
 	}
 	function tambah_buku()
@@ -59,7 +108,7 @@ class Dashboard extends CI_Controller {
 		$data['kategori'] = $this->M_perpus->get_data('kategori')->result();
 		$this->load->view('header');
 		$this->load->view('sidebar');
-		$this->load->view('tambah_buku', $data);
+		$this->load->view('admin/tambah_buku', $data);
 		$this->load->view('footer');
 	}
 	function tambah_buku_aksi(){
@@ -101,7 +150,7 @@ class Dashboard extends CI_Controller {
 				$data['kategori'] = $this->M_perpus->get_data('kategori')->result();
 				$this->load->view('header');
 				$this->load->view('sidebar');
-				$this->load->view('tambah_buku', $data);
+				$this->load->view('admin/tambah_buku', $data);
 				$this->load->view('footer');
 			}
 		}
@@ -119,7 +168,7 @@ class Dashboard extends CI_Controller {
 		$data['kategori'] = $this->M_perpus->get_data('kategori')->result();
 		$this->load->view('header');
 		$this->load->view('sidebar');
-		$this->load->view('edit_buku',$data);
+		$this->load->view('admin/edit_buku',$data);
 		$this->load->view('footer');
 	}
 
@@ -191,7 +240,7 @@ class Dashboard extends CI_Controller {
 	{
 		$this->load->view('header');
 		$this->load->view('sidebar');
-		$this->load->view('tambah_anggota');
+		$this->load->view('admin/tambah_anggota');
 		$this->load->view('footer');
 	}
 
@@ -224,7 +273,7 @@ class Dashboard extends CI_Controller {
 		$data['anggota'] = $this->M_perpus->edit_data_anggota($where)->result();
 		$this->load->view('header');
 		$this->load->view('sidebar');
-		$this->load->view('edit_anggota',$data);
+		$this->load->view('admin/edit_anggota',$data);
 		$this->load->view('footer');
 	}
 
@@ -266,6 +315,26 @@ class Dashboard extends CI_Controller {
 					redirect('dashboard/data_anggota');
 			}
 		}	
+	}
+
+	function data_peminjam()
+	{
+		$where = array('id_user' => 'status_peminja');
+		$data['pinjaman'] = $this->M_perpus->get_data_peminjam()->result();
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('admin/peminjam', $data);
+		$this->load->view('footer');
+	}
+
+	function approve_pinjaman($id_pinjam){
+		$data = array(
+			'status_peminjaman' => '1'			
+			);
+		$where = array(
+			'id_pinjam' => $id_pinjam);
+		$this->M_perpus->update_data('transaksi',$data,$where);
+		redirect('dashboard/data_peminjam');
 	}
 
 	function logout(){

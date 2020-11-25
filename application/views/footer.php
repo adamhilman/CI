@@ -21,6 +21,11 @@
 
 
 <!-- custom -->
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
  <script src="<?php echo base_url(); ?>asset/js/main.js"></script>
  <script type="text/javascript">
   $(document).ready(function(){

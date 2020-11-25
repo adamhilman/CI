@@ -14,6 +14,14 @@ class M_perpus extends CI_Model
         return $this->db->select('*')->from('anggota')->where($where)->get();
         //return $this->db->get_where($where);
     }
+    function get_data_pinjam($where){
+        return $this->db->select('transaksi.*, buku.id_buku, buku.judul_buku')->from('transaksi')->join('buku', 'transaksi.id_buku=buku.id_buku')->where($where)->get();
+        //return $this->db->get_where($where);
+    }
+    function get_data_peminjam(){
+        return $this->db->select('transaksi.*, buku.id_buku, buku.judul_buku')->from('transaksi')->join('buku', 'transaksi.id_buku=buku.id_buku')->get();
+        //return $this->db->get_where($where);
+    }
     function get_data($table){
         return $this->db->get($table);
     }

@@ -13,30 +13,11 @@
                     <div class="col-md-12 padding-0">
                         <div class="col-md-12 padding-0">
                             <div class="col-md-12 padding-0">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="panel box-v1">
                                       <div class="panel-heading bg-white border-none">
                                         <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
-                                          <h4 class="text-left">Data Anggota</h4>
-                                        </div>
-                                        <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-                                           <h4>
-                                           <span class="icon-user icons icon text-right"></span>
-                                           </h4>
-                                        </div>
-                                      </div>
-                                      <div class="panel-body text-center">
-                                      <h1><?php echo $jml_anggota->num_rows();?></h1>
-                                        <p>Anggota</p>
-                                        <hr/>
-                                      </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="panel box-v1">
-                                      <div class="panel-heading bg-white border-none">
-                                        <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
-                                          <h4 class="text-left">Data Buku</h4>
+                                          <h4 class="text-left">Buku</h4>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-6 text-right">
                                            <h4>

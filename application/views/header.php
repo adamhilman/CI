@@ -59,13 +59,10 @@
                   <li class="dropdown avatar-dropdown">
                    <img src="<?php echo base_url(); ?>asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                    <ul class="dropdown-menu user-dropdown">
-                     <li><a href="#"><span class="fa fa-user"></span> My Profile</a></li>
-                     <li><a href="#"><span class="fa fa-calendar"></span> My Calendar</a></li>
+                     <li><a href="<?php echo base_url();?>dashboard/profile"><span class="fa fa-user"></span> My Profile</a></li>
                      <li role="separator" class="divider"></li>
                      <li class="more">
                       <ul>
-                        <li><a href=""><span class="fa fa-cogs"></span></a></li>
-                        <li><a href=""><span class="fa fa-lock"></span></a></li>
                         <li><a href="<?php echo base_url();?>/dashboard/logout"><span class="fa fa-power-off "></span></a></li>
                       </ul>
                     </li>

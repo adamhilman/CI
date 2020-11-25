@@ -13,16 +13,20 @@
               <a href="<?php echo base_url(); ?>"><span class="fa-home fa"></span> Dashboard 
               </a>
             </li>
+            <?php if ($this->session->userdata("level") == 'admin'){ ?>
             <li class="ripple"><a href="<?php echo base_url();?>dashboard/data_buku"><span class="fa fa-book"></span> Data Buku  </a>
             </li>
             <li class="ripple"><a href="<?php echo base_url();?>dashboard/data_anggota"><span class="fa fa-users"></span> Data Anggota </a>
-              <ul class="nav nav-list tree">
-                <li><a href="datatables.html">Data Tables</a></li>
-                <li><a href="handsontable.html">handsontable</a></li>
-                <li><a href="tablestatic.html">Static</a></li>
-              </ul>
             </li>
-            <li><a href="credits.html">Credits</a></li>
+            <li class="ripple"><a href="<?php echo base_url();?>dashboard/data_peminjam/<?php echo $this->session->userdata("id_member");?>"><span class="fa fa-book"></span> Data Pinjaman  </a>
+            </li>
+            <?php }; ?>
+            <?php if ($this->session->userdata("level") == 'member'){ ?>
+            <li class="ripple"><a href="<?php echo base_url();?>member/data_buku"><span class="fa fa-book"></span> Data Buku  </a>
+            </li>
+            <li class="ripple"><a href="<?php echo base_url();?>member/data_pinjaman/<?php echo $this->session->userdata("id_member");?>"><span class="fa fa-book"></span> Data Pinjaman  </a>
+            </li>
+            <?php }; ?>
           </ul>
         </div>
     </div>

@@ -31,23 +31,44 @@ class Login extends CI_Controller {
 	function aksi_login(){
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		$where = array(
+		$where_admin = array(
 			'username' => $username,
 			'password' => md5($password)
 			);
-		$cek = $this->m_login->cek_login("admin",$where)->num_rows();
-		$ambil = $this->m_login->cek_login("admin",$where)->row();
-		if($cek > 0){
- 
+		$where_member = array(
+			'email' => $username,
+			'password' => md5($password)
+			);	
+		$cek_admin = $this->m_login->cek_login_admin("admin",$where_admin)->num_rows();
+		$cek_member = $this->m_login->cek_login_member("anggota",$where_member)->num_rows();
+		$ambil_admin = $this->m_login->cek_login_admin("admin",$where_admin)->row();
+		$ambil_member = $this->m_login->cek_login_member("anggota",$where_member)->row();
+		if($cek_admin > 0){
 			$data_session = array(
 				'nama_admin' => $username,
 				'status' => "login",
-				'nama' => $ambil->nama_admin
+				'level' => "admin",
+				'nama' => $ambil_admin->nama_admin,
+				'password' => $ambil_admin->password,
+				'id_admin' => $ambil_admin->id_admin
 				);
- 
 			$this->session->set_userdata($data_session);
- 
 			redirect(base_url("dashboard"));
+ 
+		}else{
+			echo "Username dan password salah !";
+		}
+		if($cek_member > 0){
+			$data_session = array(
+				'email' => $username,
+				'status' => "login",
+				'level' => "member",
+				'nama' => $ambil_member->nama_anggota,
+				'password' => $ambil_member->password,
+				'id_member' => $ambil_member->id_anggota
+				);
+			$this->session->set_userdata($data_session);
+			redirect(base_url("member"));
  
 		}else{
 			echo "Username dan password salah !";
