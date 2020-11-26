@@ -69,10 +69,11 @@
                             <a href="<?php echo base_url().'dashboard/approve_pinjaman/'.$p->id_pinjam;?>">
                             <button type="button" class="btn btn-round btn-primary"><span class="fa fa-check-square-o"> Approve Pinjaman</span></button>
                             </a>
-                            <?php } ?>
-                            <a href="<?php echo base_url().'dashboard/hapus_buku/'.$p->id_pinjam;?>">
+                            <?php }else{ ?>
+                            <a href="<?php echo base_url().'dashboard/kembalikan_pinjaman/'.$p->id_pinjam;?>">
                             <button type="button" class="btn btn-round btn-warning"><span class="fa fa-mail-forward"> Dikembalikan</span></button>
-                            </a>  
+                            </a>
+                            <?php } ?>
                           <td>
                         </tr>
                       <?php } ?>

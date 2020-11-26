@@ -337,6 +337,19 @@ class Dashboard extends CI_Controller {
 		redirect('dashboard/data_peminjam');
 	}
 
+	// function kembalikan_pinjaman($id_pinjam){
+	// 	$tanggal_pengembalian = date('Y-m-d');
+	// 	$data = array(
+	// 		'status_peminjaman' => '1',
+	// 		'tanggal_pengembalian' => $tanggal_pengembalian,
+	// 		'denda' =>		
+	// 		);
+	// 	$where = array(
+	// 		'id_pinjam' => $id_pinjam);
+	// 	$this->M_perpus->update_data('transaksi',$data,$where);
+	// 	redirect('dashboard/data_peminjam');
+	// }
+
 	function logout(){
 		$this->session->sess_destroy();
 		redirect(base_url());
