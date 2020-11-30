@@ -1,83 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Sign In | Bootstrap Based Admin Template - Material Design</title>
+    <!-- Favicon-->
+    <link rel="icon" href="<?php echo base_url()?>asset/favicon.ico" type="image/x-icon">
 
-  <meta charset="utf-8">
-  <meta name="description" content="Miminium Admin Template v.1">
-  <meta name="author" content="Isna Nur Azis">
-  <meta name="keyword" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
-  <!-- start: Css -->
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>asset/css/bootstrap.min.css">
+    <!-- Bootstrap Core Css -->
+    <link href="<?php echo base_url()?>asset/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
 
-  <!-- plugins -->
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>asset/css/plugins/font-awesome.min.css"/>
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>asset/css/plugins/simple-line-icons.css"/>
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>asset/css/plugins/animate.min.css"/>
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>asset/css/plugins/icheck/skins/flat/aero.css"/>
-  <link href="<?php echo base_url()?>asset/css/style.css" rel="stylesheet">
-  <!-- end: Css -->
+    <!-- Waves Effect Css -->
+    <link href="<?php echo base_url()?>asset/plugins/node-waves/waves.css" rel="stylesheet" />
 
-  <link rel="shortcut icon" href="<?php echo base_url()?>asset/img/logomi.png">
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-    </head>
+    <!-- Animation Css -->
+    <link href="<?php echo base_url()?>asset/plugins/animate-css/animate.css" rel="stylesheet" />
 
-    <body id="mimin" class="dashboard form-signin-wrapper">
+    <!-- Custom Css -->
+    <link href="<?php echo base_url()?>asset/css/style.css" rel="stylesheet">
+</head>
 
-      <div class="container">
+<body class="login-page">
+    <div class="login-box">
+        <div class="logo">
+            <a href="javascript:void(0);">Admin<b>BSB</b></a>
+            <small>Admin BootStrap Based - Material Design</small>
+        </div>
+        <div class="card">
+            <div class="body">
+                <form id="sign_in" method="POST" action="login/aksi_login">
+                    <div class="msg">Sign in to start your session</div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">person</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="username" placeholder="Username" required autofocus>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" name="password" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8 p-t-5">
+                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
+                            <label for="rememberme">Remember Me</label>
+                        </div>
+                        <div class="col-xs-4">
+                            <button class="btn btn-block bg-pink waves-effect" type="submit">SIGN IN</button>
+                        </div>
+                    </div>
+                    <div class="row m-t-15 m-b--20">
+                        <div class="col-xs-6">
+                            <a href="sign-up.html">Register Now!</a>
+                        </div>
+                        <div class="col-xs-6 align-right">
+                            <a href="forgot-password.html">Forgot Password?</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-        <form action="<?php echo base_url('login/aksi_login'); ?>" method="post" class="form-signin">
-          <div class="panel periodic-login">
-              <div class="panel-body text-center">
-                  <p class="element-name">Silahkan Login Untuk Mengakses Halaman</p>
+    <!-- Jquery Core Js -->
+    <script src="<?php echo base_url()?>asset/plugins/jquery/jquery.min.js"></script>
 
-                  <i class="icons icon-arrow-down"></i>
-                  <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                    <input name="username" type="text" class="form-text" required>
-                    <span class="bar"></span>
-                    <label>Username</label>
-                  </div>
-                  <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                    <input name="password" type="password" class="form-text" required>
-                    <span class="bar"></span>
-                    <label>Password</label>
-                  </div>
-                  <label class="pull-left">
-                  <input type="checkbox" class="icheck pull-left" name="checkbox1"/> Remember me
-                  </label>
-                  <input type="submit" class="btn col-md-12" value="Login"/>
-              </div>
-          </div>
-        </form>
+    <!-- Bootstrap Core Js -->
+    <script src="<?php echo base_url()?>asset/plugins/bootstrap/js/bootstrap.js"></script>
 
-      </div>
+    <!-- Waves Effect Plugin Js -->
+    <script src="<?php echo base_url()?>asset/plugins/node-waves/waves.js"></script>
 
-      <!-- end: Content -->
-      <!-- start: Javascript -->
-      <script src="<?php echo base_url()?>asset/js/jquery.min.js"></script>
-      <script src="<?php echo base_url()?>asset/js/jquery.ui.min.js"></script>
-      <script src="<?php echo base_url()?>asset/js/bootstrap.min.js"></script>
+    <!-- Validation Plugin Js -->
+    <script src="<?php echo base_url()?>asset/plugins/jquery-validation/jquery.validate.js"></script>
 
-      <script src="<?php echo base_url()?>asset/js/plugins/moment.min.js"></script>
-      <script src="<?php echo base_url()?>asset/js/plugins/icheck.min.js"></script>
+    <!-- Custom Js -->
+    <script src="<?php echo base_url()?>asset/js/admin.js"></script>
+    <script src="<?php echo base_url()?>asset/js/pages/examples/sign-in.js"></script>
+</body>
 
-      <!-- custom -->
-      <script src="<?php echo base_url()?>asset/js/main.js"></script>
-      <script type="text/javascript">
-       $(document).ready(function(){
-         $('input').iCheck({
-          checkboxClass: 'icheckbox_flat-aero',
-          radioClass: 'iradio_flat-aero'
-        });
-       });
-     </script>
-     <!-- end: Javascript -->
-   </body>
-   </html>
+</html>

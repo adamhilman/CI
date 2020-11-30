@@ -145,12 +145,12 @@ class Dashboard extends CI_Controller {
 					'gambar' => $image['file_name']
 					);
 				$this->M_perpus->insert_data($data,'buku');
-				redirect('dashboard/data_buku');
+				redirect('admin/data/buku');
 			}else{
 				$data['kategori'] = $this->M_perpus->get_data('kategori')->result();
 				$this->load->view('header');
 				$this->load->view('sidebar');
-				$this->load->view('admin/tambah_buku', $data);
+				$this->load->view('admin/data/buku/tambah', $data);
 				$this->load->view('footer');
 			}
 		}
@@ -159,7 +159,7 @@ class Dashboard extends CI_Controller {
 	function hapus_buku($id_buku){
 		$where = array('id_buku' => $id_buku);
 		$this->M_perpus->delete_data($where,'buku');
-		redirect('dashboard/data_buku');
+		redirect('admin/data/buku');
 	}
 
 	function edit_buku($id_buku){
@@ -210,7 +210,7 @@ class Dashboard extends CI_Controller {
 						'id_buku' => $id_buku);
 				
 					$this->M_perpus->update_data('buku',$data,$where);
-					redirect('dashboard/data_buku');
+					redirect('admin/data/buku');
 			}else{
 				$data = array(
 					'id_kategori' => $kategori,
@@ -225,7 +225,7 @@ class Dashboard extends CI_Controller {
 				$where = array(
 					'id_buku' => $id_buku);
 				$this->M_perpus->update_data('buku',$data,$where);
-				redirect('dashboard/data_buku');
+				redirect('admin/data/buku');
 			}
 		}	
 	}
@@ -233,7 +233,7 @@ class Dashboard extends CI_Controller {
 	function hapus_anggota($id_anggota){
 			$where = array('id_anggota' => $id_anggota);
 			$this->M_perpus->delete_data($where,'anggota');
-			redirect('dashboard/data_anggota');
+			redirect('admin/data/anggota');
 	}
 
 	function tambah_anggota()
@@ -264,7 +264,7 @@ class Dashboard extends CI_Controller {
 					'password' => md5($password)
 					);
 				$this->M_perpus->insert_data($data,'anggota');
-				redirect('dashboard/data_anggota');
+				redirect('admin/data/anggota');
 		}
 	}
 
@@ -299,7 +299,7 @@ class Dashboard extends CI_Controller {
 					$where = array(
 						'id_anggota' => $id_anggota);
 				$this->M_perpus->update_data('anggota',$data,$where);
-				redirect('dashboard/data_anggota');
+				redirect('admin/data/anggota');
 			}else{
 				$data = array(
 					'nama_anggota' => $nama_anggota,
@@ -312,7 +312,7 @@ class Dashboard extends CI_Controller {
 					$where = array(
 						'id_anggota' => $id_anggota);
 					$this->M_perpus->update_data('anggota',$data,$where);
-					redirect('dashboard/data_anggota');
+					redirect('admin/data/anggota');
 			}
 		}	
 	}
@@ -334,7 +334,8 @@ class Dashboard extends CI_Controller {
 		$where = array(
 			'id_pinjam' => $id_pinjam);
 		$this->M_perpus->update_data('transaksi',$data,$where);
-		redirect('dashboard/data_peminjam');
+		$this->session->set_flashdata('approved', 'Approved');
+		redirect('admin/data/peminjam');
 	}
 
 	// function kembalikan_pinjaman($id_pinjam){
@@ -347,7 +348,7 @@ class Dashboard extends CI_Controller {
 	// 	$where = array(
 	// 		'id_pinjam' => $id_pinjam);
 	// 	$this->M_perpus->update_data('transaksi',$data,$where);
-	// 	redirect('dashboard/data_peminjam');
+	// 	redirect('admin/data/peminjam');
 	// }
 
 	function logout(){

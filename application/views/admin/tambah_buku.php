@@ -1,72 +1,113 @@
-            <!-- start: Content -->
-            <div id="content">
-            	<div class="col-md-12 panel">
-            		<div class="col-md-12 panel-heading">
-            			<h4>Tambah Buku</h4>
-            		</div>
-            		<div class="col-md-12 panel-body">
-            			<form action="<?php echo base_url(); ?>dashboard/tambah_buku_aksi" method="post" enctype="multipart/form-data">
-            					<div class="form-group col-md-4">
-            						<label for="kategori">Kategori Buku</label>
-            						<select class="form-control" id="kategori" name="kategori">
-            							<option value="">--Pilih Kategori--</option>
-            							<?php foreach ($kategori as $k) { ?>
-                            <option value="<?php echo $k->id_kategori; ?>"><?php echo $k->nama_kategori; ?></option>
-                          <?php } ?>
-            						</select>
-                        <?php echo form_error('id_kategori'); ?>
-            					</div>
-            					<div class="form-group col-md-4">
-            						<label for="judul_buku">Judul Buku</label>
-            						<input type="text" class="form-control" id="judul_buku" name="judul_buku">
-            					</div>
-            					<div class="form-group col-md-4">
-            						<label for="pengarang">Pengarang</label>
-            						<input type="text" class="form-control" id="pengarang" name="pengarang">
-            					</div>
-            					<div class="form-group col-md-6">
-            						<label for="penerbit">Penerbit</label>
-            						<input type="text" class="form-control" id="penerbit" name="penerbit">
-            					</div>
-            					<div class="form-group col-md-6">
-            						<label for="tahun_terbit">Tahun Terbit</label>
-            						<input type="date" class="form-control" id="tahun_terbit" name="tahun_terbit">
-            					</div>
-            					<div class="form-group col-md-12">
-            						<label for="isbn">ISBN</label>
-            						<input type="text" class="form-control" id="isbn" name="isbn">
-            					</div>
-            					<div class="form-group col-md-3">
-            						<label for="jumlah_buku">Jumlah Buku</label>
-            						<input type="number" class="form-control" id="jumlah_buku" name="jumlah_buku">
-            					</div>
-            					<div class="form-group col-md-3">
-            						<label for="lokasi">Lokasi</label>
-            						<select class="form-control" id="lokasi" name="lokasi">
-            							<option value="Rak 1">Rak 1</option>
-                          <option value="Rak 2">Rak 2</option>
-                          <option value="Rak 3">Rak 3</option>
-            						</select>
-            					</div>
-            					<div class="form-group col-md-3">
-            						<label for="status_buku">Status Buku</label>
-            						<select class="form-control" id="status_buku" name="status_buku">
-            							<option value=1>Tersedia</option>
-            							<option value=0>Tidak Tersedia</option>
-            						</select>
-            					</div>
-            					<div class="form-group col-md-12">
-            						<label for="gambar_buku">Gambar Buku</label>
-            						<input type="file" class="form-control-file" id="gambar_buku" name="gambar_buku">
-            					</div>
-                      <div class="col-md-12">
-						<button type="submit" class="btn btn-primary">Submit</button>
-						<button type="button" onclick="goBack()" class="btn">Cancel</button>
-                        </div>          				
-            			</form>
-            		</div>
-            	</div>
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Input -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Tambah Data Buku
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <form action="<?php echo base_url(); ?>dashboard/tambah_buku_aksi" method="post" enctype="multipart/form-data">
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <select class="form-control show-tick" name="kategori">
+                                            <?php foreach ($kategori as $k) { ?>
+                                            <option value="<?php echo $k->id_kategori; ?>"><?php echo $k->nama_kategori; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input name="judul_buku" type="text" class="form-control" >
+                                                <label class="form-label">Judul Buku</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input name="pengarang" type="text" class="form-control" >
+                                                <label class="form-label">Pengarang</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input name="penerbit" type="text" class="form-control" >
+                                                <label class="form-label">Penerbit</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <div class="form-line focused" id="bs_datepicker_container">
+                                                <input name="tahun_terbit" type="text" class="form-control" placeholder="Tahun Terbit">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input name="isbn" type="text" class="form-control">
+                                                <label class="form-label">ISBN</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input name="jumlah_buku" type="number" class="form-control">
+                                                <label class="form-label">Jumlah Buku</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select class="form-control show-tick" name="lokasi">
+                                            <option disabled selected>Lokasi</option>
+                                            <option value="Rak 1">Rak 1</option>
+                                            <option value="Rak 2">Rak 2</option>
+                                            <option value="Rak 3">Rak 3</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <select name="status_buku" class="form-control show-tick">
+                                            <option value="1">Tersedia</option>
+                                            <option value="0">Sedang Dipinjam</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input type="file" class="form-control" name="gambar_buku">
+                                                <label class="form-label">Jumlah Buku</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <button type="submit" class="btn bg-orange waves-effect">
+                                        <i class="material-icons">input</i>
+                                        <span>SUBMIT</span>
+                                    </button>
+                                    <button type="button" onclick="goBack()" class="btn bg-blue waves-effect">
+                                        <i class="material-icons">arrow_back</i>
+                                        <span>BACK</span>
+                                    </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-            </div>
-            <!-- end: content -->
+            <!-- #END# Input -->
+        </div>
+    </section>

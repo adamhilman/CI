@@ -45,7 +45,7 @@ class Login extends CI_Controller {
 		$ambil_member = $this->m_login->cek_login_member("anggota",$where_member)->row();
 		if($cek_admin > 0){
 			$data_session = array(
-				'nama_admin' => $username,
+				'username' => $username,
 				'status' => "login",
 				'level' => "admin",
 				'nama' => $ambil_admin->nama_admin,
@@ -60,7 +60,7 @@ class Login extends CI_Controller {
 		}
 		if($cek_member > 0){
 			$data_session = array(
-				'email' => $username,
+				'username' => $username,
 				'status' => "login",
 				'level' => "member",
 				'nama' => $ambil_member->nama_anggota,
