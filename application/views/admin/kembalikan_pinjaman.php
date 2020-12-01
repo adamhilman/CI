@@ -7,27 +7,16 @@
 				<div class="card">
 					<div class="header">
 						<h2>
-							Daftar Peminjam
+							Pengembalian Buku
 						</h2>
-						<ul class="header-dropdown m-r--5">
-							<li class="dropdown">
-								<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
-									role="button" aria-haspopup="true" aria-expanded="false">
-									<i class="material-icons">more_vert</i>
-								</a>
-								<ul class="dropdown-menu pull-right">
-									<li><a href="<?php echo base_url();?>dashboard/tambah_buku">--</a></li>
-								</ul>
-							</li>
-						</ul>
 					</div>
 					<div class="body">
 						<div class="table-responsive">
-							<table id="data_peminjam"
-								class="js-sweetalert table table-bordered table-striped table-hover">
+							<form action="<?php echo base_url();?>/dashboard/kembalikan_pinjaman_aksi" method="post">
+							<table id="data_kembali"
+								class="js-sweetalert table">
 								<thead>
 									<tr>
-										<th>No</th>
 										<th>Kode Pinjam</th>
 										<th>Nama Peminjam</th>
 										<th>Judul Buku</th>
@@ -37,31 +26,24 @@
 										<th>Status Peminjaman</th>
 										<th>Status Pengembalian</th>
 										<th>Denda /hari</th>
-										<th>Aksi</th>
+										<th>Total Denda</th>
+										<th>Keterangan Terlambat</th>
 									</tr>
 								</thead>
-								<tfoot>
-									<tr>
-										<th>No</th>
-										<th>Kode Pinjam</th>
-										<th>Nama Peminjam</th>
-										<th>Judul Buku</th>
-										<th>Jumlah Buku</th>
-										<th>Tanggal Pinjam</th>
-										<th>Tanggal Kembali</th>
-										<th>Status Peminjaman</th>
-										<th>Status Pengembalian</th>
-										<th>Denda /hari</th>
-										<th>Aksi</th>
-									</tr>
-								</tfoot>
 								<tbody>
 									<?php
                                             $no = 1;
                                             foreach ($pinjaman as $p){
-                                                ?>
+												?>
+												<?php 
+										$tanggal_sekarang = date("Y-m-d");
+										$denda = $p->denda;
+										$tanggal_kembali=date_create($p->tanggal_kembali);
+										$tanggal_pengembalian=date_create($tanggal_sekarang);
+										$diff=date_diff($tanggal_kembali,$tanggal_pengembalian);?>
 									<tr class=<?php if ($p->judul_buku == NULL){ echo "danger";}?>>
-										<td><?php echo $no++; ?></td>
+									<input name="id_pinjam" type="hidden" value="<?php echo $p->id_pinjam;?>">
+
 										<td>PJM00<?php echo $p->id_pinjam ?></td>
 										<td><?php echo $p->nama_anggota ?></td>
 										<td><?php if ($p->judul_buku == NULL){
@@ -88,28 +70,35 @@
                                                 } ?>
 										</td>
 										<td><?php echo $p->denda ?></td>
+										<td><?php
+										if ($diff->format("%R") == "+"){ $terlambat = $diff->format("%a");
+										$total_denda = $denda * $terlambat;?>
+										<label><?php echo $total_denda;?></label>
+										<input name="total_denda" type="hidden" value="<?php echo $total_denda;?>">
+										<?php }else{ ?>
+										<label>0</label>
+										<input name="total_denda" type="hidden" value="0">
+										<?php } ?>
+										</td>
 										<td>
-											<?php if ($p->status_peminjaman == '0'){?>
-											<a
-												href="<?php echo base_url().'dashboard/approve_pinjaman/'.$p->id_pinjam;?>">
-												<button type="button" class="btn btn-round btn-primary"><span
-														class="fa fa-check-square-o"> Approve Pinjaman</span></button>
-											</a>
-											<?php }else{ ?>
-											<a
-												href="<?php echo base_url().'admin/data/peminjam/kembalikan/'.$p->id_pinjam;?>">
-												<button type="button" class="btn btn-round btn-warning"><span
-														class="fa f
-														a-mail-forward"> Dikembalikan</span></button>
-											</a>
-											
-											<?php } ?>
+											<?php if ($diff->format("%R") == "+"){
+												echo "Anda terlambat selama ".$diff->format("%a Hari");
+											}else{echo "Tidak Terlambat";}
+											?>
 										</td>
 									</tr>
 									<?php } ?>
 								</tbody>
 							</table>
-
+							<button type="submit" class="btn bg-orange waves-effect">
+                                        <i class="material-icons">input</i>
+                                        <span>SUBMIT</span>
+									</button>							
+									<button type="button" onclick="goBack()" class="btn bg-blue waves-effect">
+                                        <i class="material-icons">arrow_back</i>
+                                        <span>BACK</span>
+                                    </button>
+								</form>
 						</div>
 					</div>
 				</div>

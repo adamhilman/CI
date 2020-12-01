@@ -35,7 +35,7 @@ class Dashboard extends CI_Controller {
 		$data['jml_anggota'] = $this->db->query('SELECT * FROM anggota');
 		$this->load->view('header');
 		$this->load->view('sidebar');
-		$this->load->view('index', $data);
+		$this->load->view('admin/index', $data);
 		$this->load->view('footer');
 	}
 	public function profile()
@@ -43,6 +43,13 @@ class Dashboard extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('sidebar');
 		$this->load->view('profile');
+		$this->load->view('footer');
+	}
+	public function profile_member()
+	{
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('profile2');
 		$this->load->view('footer');
 	}
 	function update_profile(){
@@ -63,21 +70,69 @@ class Dashboard extends CI_Controller {
 					
 						$this->M_perpus->update_data('admin',$data,$where);
 						$this->session->set_userdata('nama', $nama);
-						redirect('dashboard/profile');
+						redirect('user/profile');
 				}else{
 					$data = array(
 						'nama_admin' => $nama,
-						'password' => $new_pass
+						'password' => md5($new_pass)
 						);
 						$where = array(
 							'id_admin' => $id);
 					
 						$this->M_perpus->update_data('admin',$data,$where);
 						$this->session->set_userdata('nama', $nama);
-						redirect('dashboard/profile');
+						$psswd = md5($new_pass);
+						$this->session->set_userdata('password', $psswd);
+						redirect('user/profile');
 				}
 			}else{
-				echo "salah password lama";
+				$this->session->set_flashdata('profile', 'Password Lama Salah');
+				redirect('user/profile');
+			}
+		}else{
+			$this->load->view('header');
+			$this->load->view('sidebar');
+			$this->load->view('profile');
+			$this->load->view('footer');
+		}
+	}
+
+	function update_profile_anggota(){
+		$konfirmasi = $this->session->userdata("password");
+		$id = $this->input->post('id_anggota');
+		$new_pass = $this->input->post('new_pass');
+		$old_pass = $this->input->post('old_pass');
+		$nama = $this->input->post('nama_lengkap');
+		$this->form_validation->set_rules('old_pass', 'Password Lama', 'required');
+		if($this->form_validation->run() != false){
+			if ($konfirmasi == md5($old_pass)){
+				if( $new_pass == NULL ){
+					$data = array(
+						'nama_anggota' => $nama
+						);
+						$where = array(
+							'id_anggota' => $id);
+					
+						$this->M_perpus->update_data('anggota',$data,$where);
+						$this->session->set_userdata('nama', $nama);
+						redirect('user/profile_member');
+				}else{
+					$data = array(
+						'nama_anggota' => $nama,
+						'password' => md5($new_pass)
+						);
+						$where = array(
+							'id_anggota' => $id);
+					
+						$this->M_perpus->update_data('anggota',$data,$where);
+						$this->session->set_userdata('nama', $nama);
+						$psswd = md5($new_pass);
+						$this->session->set_userdata('password', $psswd);
+						redirect('user/profile_member');
+				}
+			}else{
+				$this->session->set_flashdata('profile', 'Password Lama Salah');
+				redirect('user/profile');
 			}
 		}else{
 			$this->load->view('header');
@@ -116,6 +171,7 @@ class Dashboard extends CI_Controller {
 		$judul_buku = $this->input->post('judul_buku');
 		$pengarang = $this->input->post('pengarang');
 		$penerbit = $this->input->post('penerbit');
+		$denda = $this->input->post('denda');
 		$tahun_terbit = $this->input->post('tahun_terbit');
 		$isbn = $this->input->post('isbn');
 		$jumlah_buku = $this->input->post('jumlah_buku');
@@ -136,6 +192,7 @@ class Dashboard extends CI_Controller {
 					'id_kategori' => $kategori,
 					'judul_buku' => $judul_buku,
 					'pengarang' => $pengarang,
+					'denda' => $denda,
 					'penerbit' => $penerbit,
 					'tahun_terbit' => $tahun_terbit,
 					'isbn' => $isbn,
@@ -145,6 +202,7 @@ class Dashboard extends CI_Controller {
 					'gambar' => $image['file_name']
 					);
 				$this->M_perpus->insert_data($data,'buku');
+				$this->session->set_flashdata('sukses', 'Data Berhasil Ditambahkan');
 				redirect('admin/data/buku');
 			}else{
 				$data['kategori'] = $this->M_perpus->get_data('kategori')->result();
@@ -177,6 +235,7 @@ class Dashboard extends CI_Controller {
 		$kategori = $this->input->post('kategori');
 		$judul_buku = $this->input->post('judul_buku');
 		$pengarang = $this->input->post('pengarang');
+		$denda = $this->input->post('denda');
 		$penerbit = $this->input->post('penerbit');
 		$tahun_terbit = $this->input->post('tahun_terbit');
 		$isbn = $this->input->post('isbn');
@@ -199,6 +258,7 @@ class Dashboard extends CI_Controller {
 					'judul_buku' => $judul_buku,
 					'pengarang' => $pengarang,
 					'penerbit' => $penerbit,
+					'denda' => $denda,
 					'tahun_terbit' => $tahun_terbit,
 					'isbn' => $isbn,
 					'jumlah_buku' => $jumlah_buku,
@@ -210,10 +270,12 @@ class Dashboard extends CI_Controller {
 						'id_buku' => $id_buku);
 				
 					$this->M_perpus->update_data('buku',$data,$where);
+					$this->session->set_flashdata('sukses', 'Data Berhasil DiUpdate');
 					redirect('admin/data/buku');
 			}else{
 				$data = array(
 					'id_kategori' => $kategori,
+					'denda' => $denda,
 					'judul_buku' => $judul_buku,
 					'pengarang' => $pengarang,
 					'penerbit' => $penerbit,
@@ -225,6 +287,7 @@ class Dashboard extends CI_Controller {
 				$where = array(
 					'id_buku' => $id_buku);
 				$this->M_perpus->update_data('buku',$data,$where);
+				$this->session->set_flashdata('sukses', 'Data Berhasil DiUpdate');
 				redirect('admin/data/buku');
 			}
 		}	
@@ -264,6 +327,7 @@ class Dashboard extends CI_Controller {
 					'password' => md5($password)
 					);
 				$this->M_perpus->insert_data($data,'anggota');
+				$this->session->set_flashdata('sukses', 'Data Berhasil Ditambahkan');
 				redirect('admin/data/anggota');
 		}
 	}
@@ -299,6 +363,7 @@ class Dashboard extends CI_Controller {
 					$where = array(
 						'id_anggota' => $id_anggota);
 				$this->M_perpus->update_data('anggota',$data,$where);
+				$this->session->set_flashdata('sukses', 'Data Berhasil DiUpdate');
 				redirect('admin/data/anggota');
 			}else{
 				$data = array(
@@ -312,6 +377,7 @@ class Dashboard extends CI_Controller {
 					$where = array(
 						'id_anggota' => $id_anggota);
 					$this->M_perpus->update_data('anggota',$data,$where);
+					$this->session->set_flashdata('sukses', 'Data Berhasil DiUpdate');
 					redirect('admin/data/anggota');
 			}
 		}	
@@ -319,7 +385,6 @@ class Dashboard extends CI_Controller {
 
 	function data_peminjam()
 	{
-		$where = array('id_user' => 'status_peminja');
 		$data['pinjaman'] = $this->M_perpus->get_data_peminjam()->result();
 		$this->load->view('header');
 		$this->load->view('sidebar');
@@ -337,20 +402,38 @@ class Dashboard extends CI_Controller {
 		$this->session->set_flashdata('approved', 'Approved');
 		redirect('admin/data/peminjam');
 	}
-
-	// function kembalikan_pinjaman($id_pinjam){
-	// 	$tanggal_pengembalian = date('Y-m-d');
-	// 	$data = array(
-	// 		'status_peminjaman' => '1',
-	// 		'tanggal_pengembalian' => $tanggal_pengembalian,
-	// 		'denda' =>		
-	// 		);
-	// 	$where = array(
-	// 		'id_pinjam' => $id_pinjam);
-	// 	$this->M_perpus->update_data('transaksi',$data,$where);
-	// 	redirect('admin/data/peminjam');
-	// }
-
+	function kembalikan_pinjaman($id_pinjam){
+		$where = array('id_pinjam' => $id_pinjam);
+		$data['pinjaman'] = $this->M_perpus->get_data_kembalikan($where)->result();
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('admin/kembalikan_pinjaman',$data);
+		$this->load->view('footer');
+	}
+	function kembalikan_pinjaman_aksi(){
+		$tanggal_pencatatan = date('Y-m-d H:i:s');
+		$tanggal_pengembalian = date('Y-m-d');
+		$id_pinjam = $this->input->post('id_pinjam');
+		$total_denda = $this->input->post('total_denda');
+		$data = array(
+			'tanggal_pencatatan' => $tanggal_pencatatan,
+			'status_pengembalian' => '1',
+			'tanggal_pengembaliasn' => $tanggal_pengembalian,
+			'total_denda' => $total_denda		
+			);
+		$where = array(
+			'id_pinjam' => $id_pinjam);
+		$this->M_perpus->update_data('transaksi',$data,$where);
+		redirect('admin/data/peminjam');
+	}
+	function transaksi()
+	{
+		$data['transaksi'] = $this->M_perpus->get_data_transaksi()->result();
+		$this->load->view('header');
+		$this->load->view('sidebar');
+		$this->load->view('admin/transaksi', $data);
+		$this->load->view('footer');
+	}
 	function logout(){
 		$this->session->sess_destroy();
 		redirect(base_url().'login');

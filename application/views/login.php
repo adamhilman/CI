@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Sign In | Bootstrap Based Admin Template - Material Design</title>
+    <title>Sign In | Pendataan Pinjaman Buku Perpustakaan</title>
     <!-- Favicon-->
     <link rel="icon" href="<?php echo base_url()?>asset/favicon.ico" type="image/x-icon">
 
@@ -33,6 +33,7 @@
         </div>
         <div class="card">
             <div class="body">
+            <div class="flash-data" data-akun="<?php echo $this->session->flashdata('akun');?>"></div>
                 <form id="sign_in" method="POST" action="login/aksi_login">
                     <div class="msg">Sign in to start your session</div>
                     <div class="input-group">
@@ -62,10 +63,7 @@
                     </div>
                     <div class="row m-t-15 m-b--20">
                         <div class="col-xs-6">
-                            <a href="sign-up.html">Register Now!</a>
-                        </div>
-                        <div class="col-xs-6 align-right">
-                            <a href="forgot-password.html">Forgot Password?</a>
+                            <a href="login/signup">Register Now!</a>
                         </div>
                     </div>
                 </form>

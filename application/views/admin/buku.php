@@ -1,13 +1,7 @@
 <section class="content">
-<div class="flash-data" data-flashdata="<?php echo $this->session->flashdata('approved');?>"></div>
+<div class="flash-data" data-sukses="<?php echo $this->session->flashdata('sukses');?>"></div>
 
         <div class="container-fluid">
-            <div class="block-header">
-                <h2>
-                    Data Buku
-                    <small>Buku yang tersedia di perpustakaan</small>
-                </h2>
-            </div>
             <!-- Exportable Table -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -40,6 +34,7 @@
                                             <th>Tahun Terbit</th>
                                             <th>ISBN</th>
                                             <th>Lokasi</th>
+                                            <th>Denda /hari</th>
                                             <th>Status</th>
                                             <th>Pilihan</th>
                                         </tr>
@@ -54,6 +49,7 @@
                                             <th>Tahun Terbit</th>
                                             <th>ISBN</th>
                                             <th>Lokasi</th>
+                                            <th>Denda /hari</th>
                                             <th>Status</th>
                                             <th>Pilihan</th>
                                         </tr>
@@ -72,6 +68,7 @@
                                                 <td><?php echo $b->tahun_terbit ?></td>
                                                 <td><?php echo $b->isbn ?></td>
                                                 <td><?php echo $b->lokasi ?></td>
+                                                <td><?php echo $b->denda ?></td>
                                                 <td>
                                                     <?php
                                                     if($b->status_buku == "1"){
@@ -80,7 +77,7 @@
                                                     echo "Sedang Dipinjam";
                                                     } ?>
                                                     <td>
-                                                    <a href="<?php echo base_url().'dashboard/edit_buku/'.$b->id_buku;?>">
+                                                    <a href="<?php echo base_url().'admin/data/buku/edit/'.$b->id_buku;?>">
                                                         <button type="button" class="btn bg-amber waves-effect">
                                                             <i class="material-icons">edit</i>
                                                             <span>Edit</span>

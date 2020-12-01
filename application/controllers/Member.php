@@ -85,6 +85,8 @@ class Member extends CI_Controller {
 
 		//Tambahkan ke tabel transaksi
 			$this->form_validation->set_rules('tanggal_kembali', 'Tanggal kembali', 'required');
+			$this->form_validation->set_rules('tanggal_pinjam', 'Tanggal pinjam', 'required');
+
 			if($this->form_validation->run() != false){
 					$data = array(
 						'id_buku' => $id_buku,
@@ -94,7 +96,7 @@ class Member extends CI_Controller {
 						'jumlah_pinjam' => $jumlah_pinjam,
 						);
 					$this->M_perpus->insert_data($data,'transaksi');
-					redirect('member/data_pinjaman/'.$id_user);
+					redirect('user/data/pinjaman/'.$id_user);
 			}	
 	}
 

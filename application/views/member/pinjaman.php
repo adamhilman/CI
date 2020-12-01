@@ -1,39 +1,51 @@
-            <!-- start: Content -->
-            <div id="content">
-               <div class="panel box-shadow-none content-header">
-                  <div class="panel-body">
-                    <div class="col-md-12">
-                        <h3 class="animated fadeInLeft">Data Buku</h3>
-                        <p class="animated fadeInDown">
-                          Home <span class="fa-angle-right fa"></span> Data Buku
-                        </p>
-                    </div>
-                  </div>
-              </div>
-              <div class="col-md-12 top-20 padding-0">
-                <div class="col-md-12">
-                  <div class="panel">
-                    <div class="panel-heading">
-                        <div class="col-sm-6 text-left padding-0">
-                            <h4 class="text-left">Data Buku</h4>
-                        </div>
-                    </div>
-                    <div class="panel-body">                      
-                      <div class="responsive-table">
-                      <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
-                      <thead>
-                        <tr>
-                          <th>No</th>
+<section class="content">
+	<div class="flash-data" data-flashdata="<?php echo $this->session->flashdata('approved');?>"></div>
+	<div class="container-fluid">
+		<!-- Exportable Table -->
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2>
+							Daftar Pinjaman
+						</h2>
+						<ul class="header-dropdown m-r--5">
+							<li class="dropdown">
+								<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
+									role="button" aria-haspopup="true" aria-expanded="false">
+									<i class="material-icons">more_vert</i>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="body">
+						<div class="table-responsive">
+							<table id="data_peminjam"
+								class="js-sweetalert table table-bordered table-striped table-hover">
+								<thead>
+									<tr>
+									<th>No</th>
                           <th>Kode Pinjam</th>
                           <th>Judul Buku</th>
                           <th>Jumlah Buku</th>
                           <th>Tanggal Pinjam</th>
                           <th>Tanggal Kembali</th>
                           <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      <?php
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+									<th>No</th>
+                          <th>Kode Pinjam</th>
+                          <th>Judul Buku</th>
+                          <th>Jumlah Buku</th>
+                          <th>Tanggal Pinjam</th>
+                          <th>Tanggal Kembali</th>
+                          <th>Status</th>
+									</tr>
+								</tfoot>
+								<tbody>
+								<?php
                       $no = 1;
                       foreach ($pinjaman as $p){
                         ?>
@@ -55,12 +67,14 @@
                           </td>
                         </tr>
                       <?php } ?>
-                      </tbody>
-                        </table>
-                      </div>
-                  </div>
-                </div>
-              </div>  
-              </div>
-            </div>
-          <!-- end: content -->
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- #END# Exportable Table -->
+	</div>
+</section>

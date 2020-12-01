@@ -5,7 +5,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="images/user.png" width="48" height="48" alt="User" />
+                    <img src="<?php echo base_url();?>asset/images/user.png" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $this->session->userdata("nama"); ?></div>
@@ -13,13 +13,12 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="dashboard/logout"><i class="material-icons">input</i>Sign Out</a></li>
+                            <?php if ($this->session->userdata("level") == 'admin'){ ?>
+                            <li><a href="<?php echo base_url();?>user/profile"><i class="material-icons">person</i>Profile</a></li>
+                            <?php }else{ ?>
+                            <li><a href="<?php echo base_url();?>user/profile_member"><i class="material-icons">person</i>Profile</a></li>
+                            <?php } ?>
+                            <li><a href="<?php echo base_url();?>dashboard/logout"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -30,10 +29,17 @@
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li>
-                        <a href="<?php echo base_url();?>">
+                    <?php if ($this->session->userdata("level") == 'admin'){ ?>
+                        <a href="<?php echo base_url();?>dashboard">
                             <i class="material-icons">home</i>
                             <span>Home</span>
                         </a>
+                    <?php }else{ ?>
+                        <a href="<?php echo base_url();?>member">
+                            <i class="material-icons">home</i>
+                            <span>Home</span>
+                        </a>
+                    <?php } ?>
                     </li>
                     <li <?php if ($this->uri->segment(2) == 'data'){ echo "class='active'";};?>>
                         <a href="javascript:void(0);" class="menu-toggle">
@@ -49,17 +55,17 @@
                                 <a href="<?php echo base_url();?>admin/data/anggota">Anggota</a>
                             </li>
                             <li <?php if ($this->uri->segment(3) == 'peminjam'){ echo "class='active'";}; ?>>
-                                <a href="<?php echo base_url();?>admin/data/peminjam/<?php echo $this->session->userdata("id_member");?>">Peminjam</a>
+                                <a href="<?php echo base_url();?>admin/data/peminjam/">Peminjam</a>
                             </li>
-                            <li>
-                                <a href="pages/forms/form-validation.html">Transaksi</a>
+                            <li <?php if ($this->uri->segment(3) == 'transaksi'){ echo "class='active'";}; ?>>
+                                <a href="<?php echo base_url();?>admin/data/transaksi">Transaksi</a>
                             </li>
                         <?php }elseif ($this->session->userdata("level") == 'member'){ ?>
-                            <li>
-                                <a href="<?php echo base_url();?>member/data_buku">Buku</a>
+                            <li <?php if ($this->uri->segment(3) == 'buku'){ echo "class='active'";}; ?>>
+                                <a href="<?php echo base_url();?>user/data/buku">Buku</a>
                             </li>
-                            <li>
-                                <a href="<?php echo base_url();?>member/data_pinjaman/<?php echo $this->session->userdata("id_member");?>">Pinjaman</a>
+                            <li <?php if ($this->uri->segment(3) == 'pinjaman'){ echo "class='active'";}; ?>>
+                                <a href="<?php echo base_url();?>user/data/pinjaman/<?php echo $this->session->userdata("id_member");?>">Pinjaman</a>
                             </li>
                         <?php } ?>
                         </ul>

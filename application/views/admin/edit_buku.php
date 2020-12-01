@@ -93,9 +93,18 @@
                                 <div class="row clearfix">
                                     <div class="col-sm-4">
                                         <div class="form-group form-float">
+                                            <h4>Gambar Buku</h4>
                                             <div class="form-line">
                                                 <input type="file" class="form-control" name="gambar_buku">
-                                                <label class="form-label">Jumlah Buku</label>
+                                            </div>
+                                            <?php echo $b->gambar;?>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input name="denda" type="number" class="form-control" value="<?php echo $b->denda;?>">
+                                                <label class="form-label">Denda /hari</label>
                                             </div>
                                         </div>
                                     </div>

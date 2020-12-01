@@ -1,6 +1,12 @@
 <section class="content">
 	<div class="flash-data" data-flashdata="<?php echo $this->session->flashdata('approved');?>"></div>
 	<div class="container-fluid">
+		<div class="block-header">
+			<h2>
+				Data Peminjam
+				<small>Daftar peminjam buku perpustakaan</small>
+			</h2>
+		</div>
 		<!-- Exportable Table -->
 		<div class="row clearfix">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -97,12 +103,10 @@
 											</a>
 											<?php }else{ ?>
 											<a
-												href="<?php echo base_url().'admin/data/peminjam/kembalikan/'.$p->id_pinjam;?>">
+												href="<?php echo base_url().''.$p->id_pinjam;?>">
 												<button type="button" class="btn btn-round btn-warning"><span
-														class="fa f
-														a-mail-forward"> Dikembalikan</span></button>
+														class="fa fa-mail-forward"> Dikembalikan</span></button>
 											</a>
-											
 											<?php } ?>
 										</td>
 									</tr>

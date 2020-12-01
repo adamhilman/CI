@@ -1,13 +1,7 @@
 <section class="content">
-<div class="flash-data" data-flashdata="<?php echo $this->session->flashdata('approved');?>"></div>
+<div class="flash-data" data-sukses="<?php echo $this->session->flashdata('sukses');?>"></div>
 
 	<div class="container-fluid">
-		<div class="block-header">
-			<h2>
-				Data Anggota
-				<small>Anggota yang telah terdaftar di perpustakaan</small>
-			</h2>
-		</div>
 		<!-- Exportable Table -->
 		<div class="row clearfix">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -23,7 +17,7 @@
 									<i class="material-icons">more_vert</i>
 								</a>
 								<ul class="dropdown-menu pull-right">
-									<li><a href="<?php echo base_url();?>dashboard/tambah_anggota">Tambah Anggota</a>
+									<li><a href="<?php echo base_url();?>admin/data/anggota/tambah">Tambah Anggota</a>
 									</li>
 								</ul>
 							</li>

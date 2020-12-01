@@ -19,7 +19,15 @@ class M_perpus extends CI_Model
         //return $this->db->get_where($where);
     }
     function get_data_peminjam(){
-        return $this->db->select('transaksi.*, buku.id_buku, buku.judul_buku')->from('transaksi')->join('buku', 'transaksi.id_buku=buku.id_buku')->get();
+        return $this->db->select('transaksi.*, buku.judul_buku, buku.denda, anggota.nama_anggota')->from('transaksi')->join('buku', 'transaksi.id_buku=buku.id_buku', 'left')->join('anggota', 'transaksi.id_user=anggota.id_anggota', 'left')->where('status_pengembalian', 0)->get();
+        //return $this->db->get_where($where);
+    }
+    function get_data_kembalikan($where){
+        return $this->db->select('transaksi.*, buku.judul_buku, buku.denda, anggota.nama_anggota')->from('transaksi')->join('buku', 'transaksi.id_buku=buku.id_buku', 'left')->join('anggota', 'transaksi.id_user=anggota.id_anggota', 'left')->where($where)->get();
+        //return $this->db->get_where($where);
+    }
+    function get_data_transaksi(){
+        return $this->db->select('transaksi.*, buku.judul_buku, buku.denda, anggota.nama_anggota')->from('transaksi')->join('buku', 'transaksi.id_buku=buku.id_buku', 'left')->join('anggota', 'transaksi.id_user=anggota.id_anggota', 'left')->where('status_pengembalian', 1)->get();
         //return $this->db->get_where($where);
     }
     function get_data($table){

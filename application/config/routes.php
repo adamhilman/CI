@@ -50,11 +50,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'dashboard';
+$route['user/data/buku'] = 'member/data_buku';
+$route['user/data/buku/pinjam/(:num)'] = 'member/pinjam_buku/$1';
+$route['user/data/pinjaman/(:num)'] = 'member/data_pinjaman/$1';
+$route['user/profile_member'] = 'dashboard/profile_member';
+$route['user/profile_member/update'] = 'dashboard/update_profile_anggota';
+$route['user/profile'] = 'dashboard/profile';
+$route['user/profile/update'] = 'dashboard/update_profile';
 $route['admin/data/buku'] = 'dashboard/data_buku';
+$route['admin/data/buku/edit/(:any)'] = 'dashboard/edit_buku/$1';
 $route['admin/data/buku/tambah'] = 'dashboard/tambah_buku';
 $route['admin/data/buku/tambah/submit'] = 'dashboard/tambah_buku_aksi';
 $route['admin/data/anggota'] = 'dashboard/data_anggota';
+$route['admin/data/anggota/update'] = 'dashboard/update_anggota';
+$route['admin/data/anggota/tambah'] = 'dashboard/tambah_anggota';
+$route['admin/data/anggota/tambah/submit'] = 'dashboard/tambah_anggota_aksi';
 $route['admin/data/peminjam'] = 'dashboard/data_peminjam';
+$route['admin/data/peminjam/kembalikan/(:num)'] = 'dashboard/kembalikan_pinjaman/$1';
+$route['admin/data/transaksi'] = 'dashboard/transaksi';
+
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

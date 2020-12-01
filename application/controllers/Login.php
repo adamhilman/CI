@@ -21,11 +21,40 @@ class Login extends CI_Controller {
 	function __construct(){
 		parent::__construct();		
 		$this->load->model('m_login');
- 
+		$this->load->model('M_perpus');
+
 	}
  
 	function index(){
 		$this->load->view('login');
+	}
+
+	function signup(){
+		$this->load->view('signup');
+	}
+	function tambah_anggota_aksi(){
+		$nama_anggota = $this->input->post('nama_lengkap');
+		$gender = $this->input->post('gender');
+		$no_telp = $this->input->post('no_telp');
+		$alamat = $this->input->post('alamat');
+		$email = $this->input->post('email');
+		$password = $this->input->post('password');
+		$this->form_validation->set_rules('nama_lengkap', 'Nama Anggota', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		if($this->form_validation->run() != false){
+				$data = array(
+					'nama_anggota' => $nama_anggota,
+					'gender' => $gender,
+					'no_telp' => $no_telp,
+					'alamat' => $alamat,
+					'email' => $email,
+					'password' => md5($password)
+					);
+				$this->M_perpus->insert_data($data,'anggota');
+				$this->session->set_flashdata('akun', 'Akun berhasil dibuat');
+				redirect('login');
+		}
 	}
  
 	function aksi_login(){

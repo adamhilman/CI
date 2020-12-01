@@ -1,42 +1,74 @@
-            <!-- start: Content -->
-            <div id="content">
-            	<div class="col-md-12 panel">
-            		<div class="col-md-12 panel-heading">
-            			<h4>My Profile</h4>
-            		</div>
-            		<div class="col-md-12 panel-body">
-					<?php echo validation_errors(); ?>
-            			<form action="<?php echo base_url(); ?>dashboard/update_profile" method="post" enctype="multipart/form-data">
-						<div class="row">		
-						<div class="form-group col-md-4">
-						<input type="hidden" name="id_admin" value="<?php echo $this->session->userdata("id_admin");?>">
-            						<label for="nama_lengkap">Nama Lengkap</label>
-            						<input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="<?php echo $this->session->userdata("nama");?>">
-            					</div>
-            				
-								</div>
-								
-								<div class="row">
-            					<div class="form-group col-md-6">
-            						<label for="new_pass">Password Baru</label>
-            						<input type="password" class="form-control" id="new_pass" name="new_pass">
-								</div>
-								<div class="form-group col-md-6">
-            						<label for="old_pass">Password Lama</label>
-            						<input type="password" class="form-control" id="old_pass" name="old_pass">
-								</div>
-								</div>
-
-                      <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="button" onclick="goBack()" class="btn">Cancel</button>
-                        </div>          				
-						</form>
-            		</div>
-            	</div>
+    <section class="content">
+        <div class="container-fluid">
+        <div class="flash-data" data-profile="<?php echo $this->session->flashdata('profile');?>"></div>
+            <!-- Input -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Profil Ku
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <form action="<?php echo base_url(); ?>user/profile/update" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="id_admin" value="<?php echo $this->session->userdata("id_admin");?>">
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input name="nama_lengkap" type="text" class="form-control" value="<?php echo $this->session->userdata("nama");?>">
+                                                <label class="form-label">Nama Lengkap</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="switch">
+                                            <div class="switch">
+                                                <h4>Apakah ingin mengganti password?</h4>
+                                                <label>Tidak<input type="checkbox" id="gantipassword" onchange="passwordBaru()"><span class="lever"></span>Ya</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix" id="new_pass" style="display:none;">
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input name="new_pass" type="password" class="form-control" >
+                                                <label class="form-label">Password Baru</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-sm-4">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <input required name="old_pass" type="password" class="form-control" >
+                                                <label class="form-label">Password Lama</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                   
+                                    <button type="submit" class="btn bg-orange waves-effect">
+                                        <i class="material-icons">input</i>
+                                        <span>SUBMIT</span>
+                                    </button>
+                                    <button type="button" onclick="goBack()" class="btn bg-blue waves-effect">
+                                        <i class="material-icons">arrow_back</i>
+                                        <span>BACK</span>
+                                    </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-            </div>
-            <!-- end: content -->
-
- 
+            <!-- #END# Input -->
+        </div>
+    </section>

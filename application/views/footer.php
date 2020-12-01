@@ -60,8 +60,6 @@ $('#bs_datepicker_container input').datepicker({
 $(document).ready( function () {
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var uri="<?php echo $this->uri->segment(3);?>";
-    console.log(uri);
     $('#data_buku').DataTable( {
         dom: 'Bfrtip',
         buttons: [
@@ -71,6 +69,7 @@ $(document).ready( function () {
             },
             {
                 extend: 'pdfHtml5',
+                orientation: 'landscape',
                 title: 'Data Buku Perpustakaan per-tanggal '+date
             }
         ]
@@ -84,6 +83,7 @@ $(document).ready( function () {
             },
             {
                 extend: 'pdfHtml5',
+                orientation: 'landscape',
                 title: 'Data Anggota Perpustakaan per-tanggal '+date
             }
         ]
@@ -93,13 +93,18 @@ $(document).ready( function () {
         buttons: [
             {
                 extend: 'excelHtml5',
-                title: 'Data Anggota Perpustakaan per-tanggal '+date
+                title: 'Data Peminjam Perpustakaan per-tanggal '+date
             },
             {
                 extend: 'pdfHtml5',
-                title: 'Data Anggota Perpustakaan per-tanggal '+date
+                orientation: 'landscape',
+                title: 'Data Peminjam Perpustakaan per-tanggal '+date
             }
         ]
+    });
+    $('#data_kembali').DataTable( {
+        dom: 'rt',
+        ordering: false
     });
 });
 </script>
@@ -120,8 +125,8 @@ function goBack() {
         .then((willDelete) => {
         if (willDelete) {
             swal({
-            title: "Wow!",
-            text: "Message!",
+            title: "Data Dihapus",
+            text: "Data berhasil dihapus!",
             icon: "success"
             }).then(function() {
             window.location = "<?php echo base_url();?>dashboard/hapus_buku/"+id;
@@ -130,9 +135,17 @@ function goBack() {
             swal("Data tidak dihapus!");
         }
         });
+    };
+    function passwordBaru() {
+      if (document.getElementById('gantipassword').checked) {
+          document.getElementById("new_pass").style.display = 'block';
+      } else {
+        document.getElementById("new_pass").style.display = 'none';
+      }
     }
 
 </script>
+
 
 <!-- Demo Js -->
 <script src="<?php echo base_url()?>asset/js/myscript.js"></script>
