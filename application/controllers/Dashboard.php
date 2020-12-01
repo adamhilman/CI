@@ -411,6 +411,7 @@ class Dashboard extends CI_Controller {
 		$this->load->view('footer');
 	}
 	function kembalikan_pinjaman_aksi(){
+		date_default_timezone_set("Asia/Jakarta");
 		$tanggal_pencatatan = date('Y-m-d H:i:s');
 		$tanggal_pengembalian = date('Y-m-d');
 		$id_pinjam = $this->input->post('id_pinjam');
@@ -418,7 +419,7 @@ class Dashboard extends CI_Controller {
 		$data = array(
 			'tanggal_pencatatan' => $tanggal_pencatatan,
 			'status_pengembalian' => '1',
-			'tanggal_pengembaliasn' => $tanggal_pengembalian,
+			'tanggal_pengembalian' => $tanggal_pengembalian,
 			'total_denda' => $total_denda		
 			);
 		$where = array(
@@ -434,6 +435,12 @@ class Dashboard extends CI_Controller {
 		$this->load->view('admin/transaksi', $data);
 		$this->load->view('footer');
 	}
+
+	function hapus_pinjaman($id_pinjam){
+		$where = array('id_pinjam' => $id_pinjam);
+		$this->M_perpus->delete_data($where,'transaksi');
+		redirect('admin/data/peminjam');
+}
 	function logout(){
 		$this->session->sess_destroy();
 		redirect(base_url().'login');

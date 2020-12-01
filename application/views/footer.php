@@ -158,6 +158,28 @@ function goBack() {
         }
         });
     };
+    function hapus_pinjaman(id){
+        swal({
+        title: "Apakah anda yakin?",
+        text: "Setelah dihapus, anda tidak dapat mengembalikan data!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            swal({
+            title: "Data Dihapus",
+            text: "Data berhasil dihapus!",
+            icon: "success"
+            }).then(function() {
+            window.location = "<?php echo base_url();?>dashboard/hapus_pinjaman/"+id;
+            });
+        } else {
+            swal("Data tidak dihapus!");
+        }
+        });
+    };
     function passwordBaru() {
       if (document.getElementById('gantipassword').checked) {
           document.getElementById("new_pass").style.display = 'block';

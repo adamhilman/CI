@@ -100,10 +100,13 @@
 												href="<?php echo base_url().'admin/data/peminjam/kembalikan/'.$p->id_pinjam;?>">
 												<button type="button" class="btn btn-round btn-warning"><span
 														class="fa f
-														a-mail-forward"> Dikembalikan</span></button>
+														a-mail-forward"> Dikembalikan</span></button>	
 											</a>
-											
 											<?php } ?>
+											<button class="btn btn-danger waves-effect" type="button"
+												onclick="hapus_pinjaman(<?php echo $p->id_pinjam;?>)"><i
+													class="material-icons">delete</i>
+												<span>Delete</span></button>
 										</td>
 									</tr>
 									<?php } ?>
