@@ -68,7 +68,7 @@
 												</button>
 											</a>
 											<button class="btn bg-blue waves-effect" type="button"
-												onclick="hapus(<?php echo $a->id_anggota;?>)"><i
+												onclick="hapus_anggota(<?php echo $a->id_anggota;?>)"><i
 													class="material-icons">delete</i>
 												<span>Delete</span></button>
 										</td>

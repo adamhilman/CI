@@ -28,14 +28,14 @@
 <body class="login-page">
     <div class="login-box">
         <div class="logo">
-            <a href="javascript:void(0);">Admin<b>BSB</b></a>
-            <small>Admin BootStrap Based - Material Design</small>
+            <a href="javascript:void(0);">LOGIN</a>
+            <small>Pendataan Pinjaman Buku Perpustakaan</small>
         </div>
         <div class="card">
             <div class="body">
             <div class="flash-data" data-akun="<?php echo $this->session->flashdata('akun');?>"></div>
                 <form id="sign_in" method="POST" action="login/aksi_login">
-                    <div class="msg">Sign in to start your session</div>
+                    <div class="msg">Silahkan login untuk memulai sesi</div>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="row m-t-15 m-b--20">
                         <div class="col-xs-6">
-                            <a href="login/signup">Register Now!</a>
+                            <a href="login/signup">Daftar Sekarang!</a>
                         </div>
                     </div>
                 </form>
